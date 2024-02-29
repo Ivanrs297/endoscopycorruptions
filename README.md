@@ -89,3 +89,6 @@ This package requires:
 
 
 The `endoscopycorruptions` package is an essential tool for researchers and developers working on image processing applications for endoscopy. By facilitating the simulation of realistic image corruptions, it allows for thorough testing and improvement of image analysis algorithms.
+
+Credits to [imagecorruptions](https://github.com/bethgelab/imagecorruptions) for the basis of this project.
+ 
