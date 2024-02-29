@@ -51,9 +51,9 @@ You can apply a corruption to your image as follows:
 
 ```python
 # Example for applying lens distortion with a severity of 5
-# corrupted_image = corrupt(image, corruption_name='lens_distortion', severity=5)
-# plt.imshow(corrupted_image)
-# plt.show()
+corrupted_image = corrupt(image, corruption_name='lens_distortion', severity=5)
+plt.imshow(corrupted_image)
+plt.show()
 ```
 
 To apply all available corruptions with varying severities and save the results:
