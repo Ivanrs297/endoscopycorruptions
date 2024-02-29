@@ -2,6 +2,10 @@
 
 The `endoscopycorruptions` Python package provides utilities to simulate common image corruptions that might occur during endoscopic procedures. This tool is designed to assist in the development and testing of image processing algorithms intended for endoscopic imagery by introducing realistic corruptions into clean images. By evaluating algorithms against corrupted images, developers can better understand the robustness and limitations of their solutions.
 
+![Alt text](https://raw.githubusercontent.com/Ivanrs297/endoscopycorruptions/main/assets/results.png "a title")
+
+
+
 ## Features
 
 - **Corrupt Function**: Applies a specified corruption to an input image.
