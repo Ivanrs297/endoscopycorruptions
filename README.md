@@ -1,7 +1,3 @@
-Based on the structure and content of the notebook you provided, the README.md for the "endoscopycorruptions" package could look something like this:
-
----
-
 # EndoscopyCorruptions
 
 The `endoscopycorruptions` Python package provides utilities to simulate common image corruptions that might occur during endoscopic procedures. This tool is designed to assist in the development and testing of image processing algorithms intended for endoscopic imagery by introducing realistic corruptions into clean images. By evaluating algorithms against corrupted images, developers can better understand the robustness and limitations of their solutions.
