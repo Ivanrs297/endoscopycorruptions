@@ -552,7 +552,6 @@ def resolution_change(x, severity=1):
 def specular_reflection(x, severity=1):
     intensity = [0.1, 0.2, 0.3, 0.4, 0.5][severity - 1]
     
-    # Convert PIL Image to numpy array if necessary
     if isinstance(x, Image.Image):
         x = np.array(x)
     
@@ -564,10 +563,8 @@ def specular_reflection(x, severity=1):
     reflection_shape = (int(x.shape[0] * 0.1), int(x.shape[1] * 0.1))  # Reflection size
     reflection_position = (np.random.randint(0, x.shape[0] - reflection_shape[0]), np.random.randint(0, x.shape[1] - reflection_shape[1]))
     
-    # Apply intensity change
     x[reflection_position[0]:reflection_position[0]+reflection_shape[0], reflection_position[1]:reflection_position[1]+reflection_shape[1]] += intensity
     
-    # Clip to ensure values are valid and convert back to original data type
     x = np.clip(x, 0, 1) * 255.0
     x = x.astype(original_dtype)
     
