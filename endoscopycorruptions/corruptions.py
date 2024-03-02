@@ -309,6 +309,34 @@ def fog(x, severity=1):
 def rgb2gray(rgb):
     return np.dot(rgb[..., :3], [0.2989, 0.5870, 0.1140])
 
+def specular_reflection(x, severity=1):
+    c = [(0.05, 0.3, 1.5, 0.5, 10, 2, 0.85),  # Reduced density, increased size
+         (0.05, 0.35, 1.5, 0.5, 12, 2, 0.85),
+         (0.05, 0.4, 1.2, 0.5, 12, 1, 0.8),
+         (0.05, 0.45, 1.2, 0.5, 12, 1, 0.75),
+         (0.05, 0.5, 1, 0.5, 12, 1, 0.7)][severity - 1]
+
+    x = np.array(x, dtype=np.float32) / 255.
+    snow_layer = np.random.normal(size=x.shape[:2], loc=c[0], scale=c[1])
+
+    snow_layer = clipped_zoom(snow_layer[..., np.newaxis], c[2])
+    snow_layer[snow_layer < c[3]] = 0  # Adjust threshold for visibility
+
+    snow_layer = np.clip(snow_layer.squeeze(), 0, 1)
+
+    snow_layer = np.round(snow_layer * 255).astype(np.uint8) / 255.
+    snow_layer = snow_layer[..., np.newaxis]
+    snow_layer = snow_layer[:x.shape[0], :x.shape[1], :]
+
+    # Preserving original color and contrast by removing contrast adjustment steps
+
+    # Add specular reflection layer without altering original image contrast
+    x_with_snow = np.clip(x + snow_layer * 0.5 + np.rot90(snow_layer, k=2) * 0.5, 0, 1)
+
+    return x_with_snow * 255
+
+
+
 def spatter(x, severity=1):
     c = [(0.65, 0.3, 4, 0.69, 0.6, 0),
          (0.65, 0.3, 3, 0.68, 0.6, 0),
@@ -547,28 +575,32 @@ def resolution_change(x, severity=1):
     x_downscaled = sk_transform.resize(x, (int(original_shape[0] * factor), int(original_shape[1] * factor)), anti_aliasing=True)
     # Upscale back to original size
     x_upscaled = sk_transform.resize(x_downscaled, (original_shape[0], original_shape[1]), anti_aliasing=True)
+    x_upscaled = (x_upscaled * 255).astype(np.uint8)
+
     return x_upscaled
 
-def specular_reflection(x, severity=1):
-    intensity = [0.1, 0.2, 0.3, 0.4, 0.5][severity - 1]
+
+
+# def specular_reflection(x, severity=1):
+#     intensity = [0.1, 0.2, 0.3, 0.4, 0.5][severity - 1]
     
-    if isinstance(x, Image.Image):
-        x = np.array(x)
+#     if isinstance(x, Image.Image):
+#         x = np.array(x)
     
-    # Ensure x is in float format to handle the addition correctly
-    original_dtype = x.dtype  # Store original dtype to convert back later
-    x = x.astype(np.float32) / 255.0  # Normalize to 0-1 range for float operations
+#     # Ensure x is in float format to handle the addition correctly
+#     original_dtype = x.dtype  # Store original dtype to convert back later
+#     x = x.astype(np.float32) / 255.0  # Normalize to 0-1 range for float operations
     
-    # Calculate reflection parameters
-    reflection_shape = (int(x.shape[0] * 0.1), int(x.shape[1] * 0.1))  # Reflection size
-    reflection_position = (np.random.randint(0, x.shape[0] - reflection_shape[0]), np.random.randint(0, x.shape[1] - reflection_shape[1]))
+#     # Calculate reflection parameters
+#     reflection_shape = (int(x.shape[0] * 0.1), int(x.shape[1] * 0.1))  # Reflection size
+#     reflection_position = (np.random.randint(0, x.shape[0] - reflection_shape[0]), np.random.randint(0, x.shape[1] - reflection_shape[1]))
     
-    x[reflection_position[0]:reflection_position[0]+reflection_shape[0], reflection_position[1]:reflection_position[1]+reflection_shape[1]] += intensity
+#     x[reflection_position[0]:reflection_position[0]+reflection_shape[0], reflection_position[1]:reflection_position[1]+reflection_shape[1]] += intensity
     
-    x = np.clip(x, 0, 1) * 255.0
-    x = x.astype(original_dtype)
+#     x = np.clip(x, 0, 1) * 255.0
+#     x = x.astype(original_dtype)
     
-    return x
+#     return x
 
 def color_changes(x, severity=1):
     shift = [0.1, 0.2, 0.3, 0.4, 0.5][severity - 1]
