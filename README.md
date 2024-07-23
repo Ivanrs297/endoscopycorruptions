@@ -91,4 +91,16 @@ This package requires:
 The `endoscopycorruptions` package is an essential tool for researchers and developers working on image processing applications for endoscopy. By facilitating the simulation of realistic image corruptions, it allows for thorough testing and improvement of image analysis algorithms.
 
 Credits to [imagecorruptions](https://github.com/bethgelab/imagecorruptions) for the basis of this project.
+
+Cite this project:
+
+@misc{Ivanrs297_endoscopycorruptions,
+  author = {Ivan Reyes-Amezcua and Ricardo Espinosa and Andres Mendez-Vazquez and Gilberto Ochoa-Ruiz and Christian Daul},
+  title = {EndoscopyCorruptions: A Python package to simulate common image corruptions in endoscopic procedures},
+  year = {2024},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/Ivanrs297/endoscopycorruptions}},
+}
+
  
