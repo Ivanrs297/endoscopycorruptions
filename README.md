@@ -92,9 +92,10 @@ The `endoscopycorruptions` package is an essential tool for researchers and deve
 
 Credits to [imagecorruptions](https://github.com/bethgelab/imagecorruptions) for the basis of this project.
 
-Cite this project:
+## Citation
+If you find our work useful, please consider citing us:
 
-```
+```bibtex
 @misc{Ivanrs297_endoscopycorruptions,
   author = {Ivan Reyes-Amezcua and Ricardo Espinosa and Andres Mendez-Vazquez and Gilberto Ochoa-Ruiz and Christian Daul},
   title = {EndoscopyCorruptions: A Python package to simulate common image corruptions in endoscopic procedures},
