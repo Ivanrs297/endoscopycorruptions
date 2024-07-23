@@ -94,6 +94,7 @@ Credits to [imagecorruptions](https://github.com/bethgelab/imagecorruptions) for
 
 Cite this project:
 
+```
 @misc{Ivanrs297_endoscopycorruptions,
   author = {Ivan Reyes-Amezcua and Ricardo Espinosa and Andres Mendez-Vazquez and Gilberto Ochoa-Ruiz and Christian Daul},
   title = {EndoscopyCorruptions: A Python package to simulate common image corruptions in endoscopic procedures},
@@ -102,5 +103,6 @@ Cite this project:
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/Ivanrs297/endoscopycorruptions}},
 }
+```
 
  
